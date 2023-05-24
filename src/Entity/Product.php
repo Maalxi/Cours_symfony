@@ -19,6 +19,9 @@ class Product
     #[ORM\Column]
     private ?bool $state = null;
 
+    #[ORM\OneToOne(mappedBy: 'product', cascade: ['persist', 'remove'])]
+    private ?Offer $offer = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +47,28 @@ class Product
     public function setState(bool $state): self
     {
         $this->state = $state;
+
+        return $this;
+    }
+
+    public function getOffer(): ?Offer
+    {
+        return $this->offer;
+    }
+
+    public function setOffer(?Offer $offer): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($offer === null && $this->offer !== null) {
+            $this->offer->setProduct(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($offer !== null && $offer->getProduct() !== $this) {
+            $offer->setProduct($this);
+        }
+
+        $this->offer = $offer;
 
         return $this;
     }
