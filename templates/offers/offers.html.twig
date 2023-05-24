@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block pagetitle %}
+	{{ page_title }}
+{% endblock %}
+
+{% block body %}
+	<ul>
+
+		{% for offer in offers %}
+
+			<div>
+				<h1>{{ offer.title }}</h1>
+				<p>{{ offer.description }}</p>
+				<p>{{ offer.price }}</p>
+			</div>
+
+		{% endfor %}
+
+	</ul>
+{% endblock %}

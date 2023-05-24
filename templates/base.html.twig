@@ -3,8 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>
-			{% block title %}Welcome!
-			{% endblock %}
+			{% block title %}{{ page_title }}{% endblock %}
 		</title>
 
 		{% block stylesheets %}
@@ -19,11 +18,12 @@
 			{{ encore_entry_script_tags('navbar') }}
 		{% endblock %}
 	</head>
+	<header>
+		{% include "./components/nav.html.twig" %}
+	</header>
 
 	<body>
-		{% include "./components/nav.html.twig" %}
-		<div class="Titre">
+		<div class="divide"></div>
 		<h1> {% block pagetitle %}{% endblock %} </h1>
-		</div>
 	</body>
 </html>
